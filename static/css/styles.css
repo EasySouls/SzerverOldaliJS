@@ -1,0 +1,104 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  height: 100vh;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background-color: blue;
+}
+
+.title {
+  text-decoration: none;
+  color: white;
+}
+
+.container {
+  display: flex;
+  height: 100%;
+}
+
+.sidebar {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: lightgray;
+  padding: 1rem 0.5rem;
+}
+
+.sidebar-item {
+  padding: 6px;
+  background-color: white;
+  border-radius: 10px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  text-align: center;
+}
+
+.sidebar-item:hover {
+  background-color: rgb(129, 191, 253);
+  color: white;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+}
+
+.content {
+  width: 80%;
+  padding: 1rem;
+  margin-top: 3%;
+  background-color: lightgray;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.post {
+  background-color: white;
+  box-shadow: black 2px;
+  border-radius: 10px;
+  padding: 0.5rem;
+}
+
+.post > span {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  padding-bottom: 0.5rem;
+}
+
+.post-usertag {
+  color: rgb(92, 82, 244);
+}
+
+.post-date {
+  color: gray;
+  margin-top: 4px;
+}
