@@ -56,6 +56,8 @@ a {
   justify-content: center;
   text-decoration: none;
   text-align: center;
+  transition: all cubic-bezier(0.55, 0.055, 0.675, 0.19) s;
+  cursor: pointer;
 }
 
 .sidebar-item:hover {
@@ -69,36 +71,13 @@ main {
 }
 
 .content {
-  width: 80%;
+  margin: 4%;
   padding: 1rem;
-  margin-top: 3%;
+  height: fit-content;
   background-color: lightgray;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-}
-
-.post {
-  background-color: white;
-  box-shadow: black 2px;
-  border-radius: 10px;
-  padding: 0.5rem;
-}
-
-.post > span {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-  padding-bottom: 0.5rem;
-}
-
-.post-usertag {
-  color: rgb(92, 82, 244);
-}
-
-.post-date {
-  color: gray;
-  margin-top: 4px;
 }
