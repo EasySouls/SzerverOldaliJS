@@ -1,5 +1,5 @@
-import { Schema } from 'mongoose';
-import db from '../db';
+const { Schema } = require('mongoose');
+const db = require('../db');
 
 const postSchema = new Schema({
   title: String,
@@ -13,4 +13,4 @@ const postSchema = new Schema({
 
 const Post = db.model('Post', postSchema);
 
-export default Post;
+module.exports = Post;

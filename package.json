@@ -2,7 +2,6 @@
   "name": "szerveroldalijs",
   "version": "1.0.0",
   "description": "A Szerver Oldali Javascript tárgyhoz készült feladat",
-  "type": "module",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",

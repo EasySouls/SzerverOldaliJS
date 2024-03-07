@@ -1,21 +1,16 @@
-import express from 'express';
-import renderMW from '../middleware/render-mw.js';
+const express = require('express');
+const renderMW = require('../middleware/renderMW.js');
+const getPostsMW = require('../middleware/posts/getPostsMW.js');
+
+const PostModel = require('../models/post.js');
+const UserModel = require('../models/user.js');
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-  res.locals.pageTitle = 'Blaze | Home';
-  renderMW('index')(req, res);
-});
+router.get('/', getPostsMW(), renderMW('index'));
 
-router.get('/follows', (req, res) => {
-  res.locals.pageTitle = 'Blaze | Follows';
-  renderMW('follows')(req, res);
-});
+router.get('/follows', renderMW('follows'));
 
-router.get('/dashboard', (req, res) => {
-  res.locals.pageTitle = 'Blaze | Dashboard';
-  renderMW('dashboard')(req, res);
-});
+router.get('/dashboard', renderMW('dashboard'));
 
-export default router;
+module.exports = router;
