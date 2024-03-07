@@ -68,10 +68,12 @@ a {
 main {
   display: flex;
   justify-content: center;
+  width: 100%;
 }
 
 .content {
   margin: 4%;
+  width: 100%;
   padding: 1rem;
   height: fit-content;
   background-color: lightgray;
@@ -80,4 +82,68 @@ main {
   flex-direction: column;
   align-items: center;
   gap: 1rem;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+}
+
+.account-info {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background-color: white;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.account-info > h3 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: lightgray;
+}
+
+.edit-profile-btn {
+  margin-top: 1rem;
+  width: fit-content;
+  padding: 6px;
+}
+
+.recent-posts {
+  width: 50%;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.post {
+  background-color: rgb(227, 227, 227);
+  box-shadow: black 2px;
+  border-radius: 10px;
+  padding: 0.5rem;
+}
+
+.post > span {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  padding-bottom: 0.5rem;
+}
+
+.post-usertag {
+  color: rgb(92, 82, 244);
+}
+
+.post-date {
+  color: gray;
+  margin-top: 4px;
 }

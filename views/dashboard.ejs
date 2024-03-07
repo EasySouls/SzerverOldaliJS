@@ -4,30 +4,70 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../css/dashboard.css" />
-    <title>Blaze | Dashboard</title>
+    <title><%= pageTitle %></title>
   </head>
   <body>
-    <header class="header">
-      <a href="/" class="title">
-        <h1>Blaze</h1>
-      </a>
-    </header>
+    <%- include('header') -%>
 
     <div class="container">
       <!-- Sidebar -->
-      <nav class="sidebar">
-        <a href="/" class="sidebar-item">Posts</a>
-        <a href="/follows" class="sidebar-item">Follows</a>
-        <a href="/dashboard" class="sidebar-item">Dashboard</a>
-      </nav>
+      <%- include('sidebar') -%>
 
       <!-- Main Content -->
       <main>
         <div class="content">
           <h2>Dashboard</h2>
-          <div style="display: flex">
-            <div class="account-info"></div>
-            <div class="recent-posts"></div>
+          <div style="display: flex; width: 100%; gap: 2rem">
+            <div class="account-info">
+              <h3>Account Info</h3>
+              <p>Name: Firstname Lastname</p>
+              <p>Tag: @usertag</p>
+              <p>Profile picture:</p>
+              <div class="avatar"></div>
+              <button class="edit-profile-btn">Edit Profile</button>
+            </div>
+            <div class="recent-posts">
+              <h3>Your Recent posts</h3>
+              <div class="post">
+                <span>
+                  <h3 class="post-title">Post</h3>
+                  <a class="post-usertag">@author1</a>
+                </span>
+                <p class="post-description">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                  laboris nisi ut aliquip ex ea commodo consequat.
+                </p>
+                <p class="post-date">Jan 1, 2020</p>
+              </div>
+              <div class="post">
+                <span>
+                  <h3 class="post-title">Post</h3>
+                  <a class="post-usertag">@author1</a>
+                </span>
+                <p class="post-description">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                  laboris nisi ut aliquip ex ea commodo consequat.
+                </p>
+                <p class="post-date">Jan 1, 2020</p>
+              </div>
+              <div class="post">
+                <span>
+                  <h3 class="post-title">Post</h3>
+                  <a class="post-usertag">@author1</a>
+                </span>
+                <p class="post-description">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                  laboris nisi ut aliquip ex ea commodo consequat.
+                </p>
+                <p class="post-date">Jan 1, 2020</p>
+              </div>
+            </div>
           </div>
         </div>
       </main>

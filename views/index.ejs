@@ -4,22 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/posts.css" />
-    <title>Blaze | Posts</title>
+    <title><%= pageTitle %></title>
   </head>
   <body>
-    <header class="header">
-      <a href="/" class="title">
-        <h1>Blaze</h1>
-      </a>
-    </header>
+    <%- include('header') -%>
 
     <div class="container">
       <!-- Sidebar -->
-      <nav class="sidebar">
-        <a href="/" class="sidebar-item">Posts</a>
-        <a href="/follows" class="sidebar-item">Follows</a>
-        <a href="/dashboard" class="sidebar-item">Dashboard</a>
-      </nav>
+      <%- include('sidebar') -%>
 
       <!-- Main Content -->
       <main>

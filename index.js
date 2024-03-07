@@ -1,5 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import router from './routes/index.js';
 
 const app = express();
 
@@ -11,17 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static('static'));
 
-app.get('/', (req, res) => {
-  res.render('index');
-});
-
-app.get('/follows', (req, res) => {
-  res.render('follows');
-});
-
-app.get('/dashboard', (req, res) => {
-  res.render('dashboard');
-});
+app.use('/', router);
 
 app.listen(app.get('port'), () => {
   console.log(`Server is running on port ${app.get('port')}`);
