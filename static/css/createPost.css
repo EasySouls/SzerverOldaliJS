@@ -68,10 +68,12 @@ a {
 main {
   display: flex;
   justify-content: center;
+  width: 100%;
 }
 
 .content {
   margin: 4%;
+  width: 100%;
   padding: 1rem;
   height: fit-content;
   background-color: lightgray;
@@ -83,42 +85,44 @@ main {
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
 }
 
-.post {
-  background-color: white;
-  box-shadow: black 2px;
-  border-radius: 10px;
-  padding: 0.5rem;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
-}
-
-.post > span {
+form {
   display: flex;
-  gap: 0.5rem;
+  flex-direction: column;
   align-items: center;
-  padding-bottom: 0.5rem;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
 }
 
-.post-usertag {
-  color: rgb(92, 82, 244);
+input,
+textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 10px;
+  border: none;
+  outline: none;
 }
 
-.post-date {
-  color: gray;
-  margin-top: 4px;
+textarea {
+  min-height: 100px;
 }
 
-.new-post-btn {
-  position: absolute;
-  right: 0;
-  padding: 0.5rem 1rem;
-  background-color: rgb(20, 208, 20);
+form > button {
+  padding: 0.5rem;
+  outline: none;
+  background-color: blue;
   color: white;
+  transition: all cubic-bezier(0.55, 0.055, 0.675, 0.19) s;
   border: none;
   border-radius: 10px;
   cursor: pointer;
-  transition: all cubic-bezier(0.55, 0.055, 0.675, 0.19) s;
 }
 
-.new-post-btn:hover {
-  background-color: rgba(15, 180, 15, 0.8);
+form > button:hover {
+  background-color: rgb(10, 91, 172);
+}
+
+form > label {
+  font-weight: bold;
+  align-self: flex-start;
 }

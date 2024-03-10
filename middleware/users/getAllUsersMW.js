@@ -3,10 +3,10 @@ const mongoose = require('../../db');
 /**
  * Gets the posts from the database and saves it to res.locals.posts
  */
-module.exports = function getPostsMW() {
+module.exports = function getAllUsersMW() {
   return async (req, res, next) => {
-    const posts = await mongoose.model('Post').find();
-    res.locals.posts = posts;
+    const users = await mongoose.model('User').find();
+    res.locals.users = users;
     return next();
   };
 };
