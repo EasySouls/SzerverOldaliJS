@@ -11,7 +11,8 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 a {
@@ -121,4 +122,12 @@ main {
 
 .new-post-btn:hover {
   background-color: rgba(15, 180, 15, 0.8);
+}
+
+footer {
+  margin-top: auto;
+  background-color: blue;
+  padding: 0.5rem;
+  color: white;
+  text-align: center;
 }

@@ -11,7 +11,8 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 a {
@@ -125,4 +126,12 @@ form > button:hover {
 form > label {
   font-weight: bold;
   align-self: flex-start;
+}
+
+footer {
+  margin-top: auto;
+  background-color: blue;
+  padding: 0.5rem;
+  color: white;
+  text-align: center;
 }

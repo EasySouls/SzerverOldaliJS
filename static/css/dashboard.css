@@ -11,7 +11,8 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 a {
@@ -146,4 +147,12 @@ main {
 .post-date {
   color: gray;
   margin-top: 4px;
+}
+
+footer {
+  margin-top: auto;
+  background-color: blue;
+  padding: 0.5rem;
+  color: white;
+  text-align: center;
 }
