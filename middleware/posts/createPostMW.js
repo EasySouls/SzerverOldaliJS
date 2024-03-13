@@ -1,5 +1,10 @@
 const requireModel = require('../requireModel');
 
+/**
+ * Creates a post in the database and saves it to res.locals.posts
+ * Required fields on the body: title, body
+ * @param {object} models - An object containing the models
+ */
 module.exports = (models) => {
   const Post = requireModel(models, 'Post');
 
