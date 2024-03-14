@@ -6,8 +6,32 @@
   padding: 0;
 }
 
+html,
+body {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
 body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+}
+
+main {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.content {
+  flex: 1;
+}
+
+.user-avatar {
+  background-color: black;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
 }

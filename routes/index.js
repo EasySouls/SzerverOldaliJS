@@ -22,6 +22,9 @@ router.get('/follows', renderMW('follows'));
 
 router.get('/dashboard', renderMW('dashboard'));
 
+router.get('/login', renderMW('login'));
+router.get('/signup', renderMW('signup'));
+
 router.get('/posts/create', renderMW('createPost'));
 router.post('/posts/create', createPostMW(models));
 router.get('/posts/edit/:id', getPostByIdMW(models), renderMW('editPost'));
