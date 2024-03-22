@@ -35,3 +35,22 @@ main {
   height: 50px;
   width: 50px;
 }
+
+.edit-profile-btn {
+  width: fit-content;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  padding: 5px 10px;
+}
+
+.account-info {
+  width: 50%;
+}
+
+.recent-posts {
+  width: 50%;
+  margin-bottom: 2rem;
+}
