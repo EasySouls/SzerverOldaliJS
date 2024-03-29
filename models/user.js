@@ -3,8 +3,10 @@ const db = require('../db');
 
 const userSchema = new Schema({
   name: String,
+  usertag: String,
   email: String,
   password: String,
+  avatarUrl: String,
   created_at: Date,
 });
 

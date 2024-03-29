@@ -4,7 +4,7 @@ const db = require('../db');
 const postSchema = new Schema({
   title: String,
   body: String,
-  created_at: Date,
+  createdAt: Date,
   _author: {
     type: Schema.Types.ObjectId,
     ref: 'User',
