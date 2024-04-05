@@ -1,6 +1,11 @@
 const express = require('express');
+const session = require('express-session');
 const bodyParser = require('body-parser');
+
+const mongooseConnection = require('./db');
 const router = require('./routes/index');
+const authRouter = require('./routes/auth');
+const { collection } = require('./models/user');
 
 const app = express();
 
@@ -12,8 +17,26 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static('static'));
 
+const MongoStore = require('connect-mongo')(session);
+
+const sessionStore = new MongoStore({
+  mongooseConnection: mongooseConnection,
+  collection: 'sessions',
+});
+
+app.use(
+  session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true,
+    store: sessionStore,
+    cookie: { maxAge: 1000 * 60 * 60 * 24 },
+  })
+);
+
 // Routes
 app.use('/', router);
+app.use('/', authRouter);
 
 // Any route that is not defined in the router will be handled here
 app.use((req, res) => {

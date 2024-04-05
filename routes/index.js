@@ -44,10 +44,6 @@ router.get(
   renderMW('dashboard')
 );
 
-// Auth screens
-router.get('/login', renderMW('login'));
-router.get('/signup', renderMW('signup'));
-
 // Posts
 router.get('/posts/create', renderMW('createPost'));
 router.post('/posts/create', createPostMW(models));
