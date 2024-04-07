@@ -1,50 +1,9 @@
 const express = require('express');
 const passport = require('passport');
-const LocalStrategy = require('passport-local');
-const crypto = require('crypto');
+
+const { generatePassword } = require('../lib/passwords.js');
 
 const renderMW = require('../middleware/renderMW.js');
-const UserModel = require('../models/user.js');
-
-passport.use(
-  new LocalStrategy(async function verify(username, password, done) {
-    const user = await UserModel.findOne({ username: username });
-    if (!user) {
-      return done(null, false, { message: 'Incorrect username.' });
-    }
-
-    crypto.pbkdf2(
-      password,
-      user.salt,
-      100000,
-      64,
-      'sha512',
-      (err, derivedKey) => {
-        if (err) {
-          return done(err);
-        }
-
-        if (derivedKey.toString('hex') === user.password) {
-          return done(null, user);
-        }
-
-        return done(null, false, { message: 'Incorrect password.' });
-      }
-    );
-  })
-);
-
-passport.serializeUser((user, done) => {
-  process.nextTick(() => {
-    done(null, { id: user._id, username: user.name, usertag: user.usertag });
-  });
-});
-
-passport.deserializeUser((user, done) => {
-  process.nextTick(() => {
-    done(null, user);
-  });
-});
 
 const router = express.Router();
 
@@ -59,5 +18,32 @@ router.post(
 );
 
 router.get('/signup', renderMW('signup'));
+
+// TODO
+router.post('/signup', (req, res) => {
+  if (
+    !req.body.name ||
+    !req.body.usertag ||
+    !req.body.email ||
+    !req.body.password ||
+    !req.body.confirmPassword
+  ) {
+    return res.status(400).send('All fields are required');
+  }
+
+  if (req.body.password !== req.body.confirmPassword) {
+    return res.status(400).send('Passwords do not match');
+  }
+
+  const { salt, hash } = generatePassword(req.body.password);
+
+  const user = new UserModel({
+    name: req.body.name,
+    usertag: req.body.usertag,
+    email: req.body.email,
+    hash: hash,
+    salt: salt,
+  });
+});
 
 module.exports = router;

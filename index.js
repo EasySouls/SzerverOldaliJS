@@ -34,6 +34,13 @@ app.use(
   })
 );
 
+// Requires the passpot config module, so the app knows about it
+// and can use the passport middleware
+require('./config/passport');
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 // Routes
 app.use('/', router);
 app.use('/', authRouter);

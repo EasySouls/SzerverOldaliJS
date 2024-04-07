@@ -15,26 +15,44 @@
   <body style="background-color: lightblue">
     <%- include('header') -%>
 
-    <form action="signup" method="post" class="container my-auto">
+    <form action="/signup" method="post" class="container my-auto">
       <h2 class="mb-4">Sign up</h2>
+      <div class="form-floating mb-3">
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          placeholder="Example Name"
+        />
+        <label for="email" class="form-label">Name</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input
+          type="text"
+          class="form-control"
+          id="usertag"
+          placeholder="@usertag"
+        />
+        <label for="email" class="form-label">Usertag</label>
+      </div>
       <div class="form-floating mb-3">
         <input
           type="email"
           class="form-control"
-          id="email-input"
+          id="email"
           placeholder="name@example.com"
         />
-        <label for="email-input" class="form-label">Email address</label>
+        <label for="email" class="form-label">Email address</label>
       </div>
       <div class="form-floating mb-3">
         <input
           type="password"
           class="form-control"
-          id="password-input"
+          id="password"
           aria-describedby="password-help"
           placeholder="Password"
         />
-        <label for="password-input" class="form-label">Password</label>
+        <label for="password" class="form-label">Password</label>
         <div id="password-help" class="form-text">
           Your password should be at least 6 characters long.
         </div>
@@ -43,12 +61,10 @@
         <input
           type="password"
           class="form-control"
-          id="password-again-input"
+          id="confirm-password"
           placeholder="Password Again"
         />
-        <label for="password-again-input" class="form-label"
-          >Password Again</label
-        >
+        <label for="confirm-password" class="form-label">Password Again</label>
       </div>
       <button type="submit" class="btn btn-primary">Sign up</button>
     </form>
