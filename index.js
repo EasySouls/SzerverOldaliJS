@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const mongooseConnection = require('./db');
 const router = require('./routes/index');
 const authRouter = require('./routes/auth');
-const { collection } = require('./models/user');
+const MongoStore = require('connect-mongo');
 
 const app = express();
 
@@ -17,11 +17,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static('static'));
 
-const MongoStore = require('connect-mongo')(session);
-
 const sessionStore = new MongoStore({
-  mongooseConnection: mongooseConnection,
-  collection: 'sessions',
+  client: mongooseConnection,
+  collectionName: 'sessions',
+  dbName: 'THSTAM',
 });
 
 app.use(
@@ -34,9 +33,9 @@ app.use(
   })
 );
 
-// Requires the passpot config module, so the app knows about it
+// Requires the passport config module, so the app knows about it
 // and can use the passport middleware
-require('./config/passport');
+const passport = require('./config/passport');
 
 app.use(passport.initialize());
 app.use(passport.session());

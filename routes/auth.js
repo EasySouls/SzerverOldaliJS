@@ -1,7 +1,7 @@
 const express = require('express');
 const passport = require('passport');
 
-const { generatePassword } = require('../lib/passwords.js');
+const { generatePassword } = require('../lib/passwordUtils.js');
 
 const renderMW = require('../middleware/renderMW.js');
 
