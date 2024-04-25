@@ -17,19 +17,21 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static('static'));
 
-const sessionStore = new MongoStore({
-  client: mongooseConnection,
-  collectionName: 'sessions',
-  dbName: 'THSTAM',
-});
+// const sessionStore = new MongoStore({
+//   client: mongooseConnection,
+//   collectionName: 'sessions',
+//   dbName: 'THSTAM',
+// });
 
 app.use(
   session({
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: true,
-    store: sessionStore,
     cookie: { maxAge: 1000 * 60 * 60 * 24 },
+    store: MongoStore.create({
+      mongoUrl: 'mongodb://localhost/THSTAM',
+    }),
   })
 );
 
