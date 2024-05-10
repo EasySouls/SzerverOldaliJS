@@ -5,7 +5,15 @@
     <h1 style="width: fit-content">Blaze</h1>
   </a>
   <nav class="d-flex gap-4">
+    <% if (locals.user) { %>
+    <div class="text-white d-flex align-items-center">
+      <span class="me-2">Logged in as:</span>
+      <strong><%= user.name %></strong>
+    </div>
+    <a href="/signout" class="text-decoration-none text-white">Sign Out</a>
+    <% } else { %>
     <a href="/login" class="text-decoration-none text-white">Login</a>
-    <a href="/signup" class="text-decoration-none text-white">Signup</a>
+    <a href="/signup" class="text-decoration-none text-white">Sign Up</a>
+    <% } %>
   </nav>
 </header>

@@ -2,6 +2,7 @@ const PostsModel = require('./models/post');
 const UsersModel = require('./models/user');
 const CommentsModel = require('./models/comment');
 const mongoose = require('mongoose');
+const { use } = require('passport');
 
 function rand(max) {
   return Math.floor(Math.random() * max);
@@ -9,27 +10,27 @@ function rand(max) {
 
 const mockUsers = [
   {
-    name: 'Pista bácsi',
+    username: 'Pista bácsi',
+    usertag: 'pistabacsi',
     email: 'pistabacsi@gmail.com',
-    password: 'pistabacsi',
     createdAt: new Date(),
   },
   {
-    name: 'Mari néni',
+    username: 'Mari néni',
+    usertag: 'marineni',
     email: 'marineni@gmail.com',
-    password: 'marineni',
     createdAt: new Date(),
   },
   {
-    name: 'János',
+    username: 'János',
+    usertag: 'janos',
     email: 'janos@gmail.com',
-    password: 'janos',
     createdAt: new Date(),
   },
   {
-    name: 'Emperor Karl Franz',
+    username: 'Emperor Karl Franz',
+    usertag: 'karl.franz',
     email: 'franz.emperor@sigmar.com',
-    password: 'For the Empire!',
     createdAt: new Date(),
   },
 ];
@@ -90,28 +91,24 @@ const mockComments = [
     content: 'This is the first comment.',
     _author: 1,
     _post: 1,
-    likes: 0,
     createdAt: new Date(),
   },
   {
     content: 'This is the second comment.',
     _author: 2,
     _post: 2,
-    likes: 0,
     createdAt: new Date(),
   },
   {
     content: 'This is the third comment.',
     _author: 3,
     _post: 3,
-    likes: 0,
     createdAt: new Date(),
   },
   {
     content: 'This is the fourth comment.',
     _author: 4,
     _post: 4,
-    likes: 0,
     createdAt: new Date(),
   },
 ];

@@ -23,9 +23,10 @@ module.exports = (models) => {
     res.locals.post.title = req.body.title;
     res.locals.post.body = req.body.content;
     res.locals.post.createdAt = new Date();
-    //res.locals.post._author = req.user._id;
+    res.locals.post._author = req.user._id;
     try {
-      await res.locals.post.save();
+      const saved = await res.locals.post.save();
+      console.log(saved);
 
       console.log('Post created: ' + res.locals.post);
 

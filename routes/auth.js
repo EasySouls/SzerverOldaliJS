@@ -61,4 +61,13 @@ router.post(
   renderMW('login')
 );
 
+router.get('/signout', (req, res) => {
+  if (req.user) {
+    req.logOut();
+    res.locals.user = null;
+    console.log(`${user.name} signed out`);
+  }
+  res.redirect('/');
+});
+
 module.exports = router;
