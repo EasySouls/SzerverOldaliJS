@@ -15,13 +15,14 @@
   <body style="background-color: lightblue">
     <%- include('header') -%>
 
-    <form action="/login" method="post" class="container my-auto">
+    <form action="/login" method="post" class="container my-auto w-50">
       <h2 class="mb-4">Login</h2>
       <div class="form-floating mb-3">
         <input
           type="email"
           class="form-control"
           id="email"
+          name="email"
           placeholder="name@example.com"
         />
         <label for="email" class="form-label">Email address</label>
@@ -31,6 +32,7 @@
           type="password"
           class="form-control"
           id="password"
+          name="password"
           placeholder="Password"
         />
         <label for="password" class="form-label">Password</label>

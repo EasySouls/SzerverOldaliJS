@@ -4,6 +4,7 @@ const passport = require('passport');
 const { generatePassword } = require('../lib/passwordUtils.js');
 
 const renderMW = require('../middleware/renderMW.js');
+const UserModel = require('../models/user.js');
 
 const router = express.Router();
 
@@ -19,31 +20,45 @@ router.post(
 
 router.get('/signup', renderMW('signup'));
 
-// TODO
-router.post('/signup', (req, res) => {
-  if (
-    !req.body.name ||
-    !req.body.usertag ||
-    !req.body.email ||
-    !req.body.password ||
-    !req.body.confirmPassword
-  ) {
-    return res.status(400).send('All fields are required');
-  }
+router.post(
+  '/signup',
+  async (req, res, next) => {
+    if (
+      !req.body.name ||
+      !req.body.usertag ||
+      !req.body.email ||
+      !req.body.password ||
+      !req.body.confirm_password
+    ) {
+      console.log(req.body);
+      return res.render('signup', {
+        error: 'All fields are required',
+        pageTitle: 'Blaze | Signup',
+      });
+    }
 
-  if (req.body.password !== req.body.confirmPassword) {
-    return res.status(400).send('Passwords do not match');
-  }
+    if (req.body.password !== req.body.confirm_password) {
+      return res.render('signup', {
+        error: 'Passwords do not match',
+        pageTitle: 'Blaze | Signup',
+      });
+    }
 
-  const { salt, hash } = generatePassword(req.body.password);
+    const { salt, hash } = generatePassword(req.body.password);
 
-  const user = new UserModel({
-    name: req.body.name,
-    usertag: req.body.usertag,
-    email: req.body.email,
-    hash: hash,
-    salt: salt,
-  });
-});
+    const user = new UserModel({
+      name: req.body.name,
+      usertag: req.body.usertag,
+      email: req.body.email,
+      hash: hash,
+      salt: salt,
+    });
+
+    const data = await user.save();
+    console.log(data);
+    next();
+  },
+  renderMW('login')
+);
 
 module.exports = router;

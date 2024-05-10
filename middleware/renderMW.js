@@ -17,6 +17,10 @@ function getPageTitleFromViewName(viewName) {
       return 'Blaze | Follows';
     case 'dashboard':
       return 'Blaze | Dashboard';
+    case 'login':
+      return 'Blaze | Login';
+    case 'signup':
+      return 'Blaze | Signup';
   }
   return 'Blaze';
 }

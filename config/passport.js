@@ -1,20 +1,23 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
-const crypto = require('crypto');
 
 const { isValidPassword } = require('../lib/passwordUtils.js');
 
 const UserModel = require('../models/user.js');
 
+const customFields = {
+  usernameField: 'email',
+  passwordField: 'password',
+};
+
 const verifyCallback = (username, password, done) => {
-  const user = UserModel.findOne({ username: username })
+  UserModel.findOne({ email: username })
     .then((user) => {
       if (!user) {
         return done(null, false);
       }
 
-      // TODO - Implement password hashing
-      const isValid = true;
+      const isValid = isValidPassword(password, user.hash, user.salt);
 
       if (isValid) {
         return done(null, user);
@@ -27,7 +30,7 @@ const verifyCallback = (username, password, done) => {
     });
 };
 
-const strategy = new LocalStrategy(verifyCallback);
+const strategy = new LocalStrategy(customFields, verifyCallback);
 
 passport.use(strategy);
 

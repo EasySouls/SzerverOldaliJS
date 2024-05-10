@@ -15,13 +15,17 @@
   <body style="background-color: lightblue">
     <%- include('header') -%>
 
-    <form action="/signup" method="post" class="container my-auto">
+    <form action="/signup" method="post" class="container my-auto w-50">
       <h2 class="mb-4">Sign up</h2>
+      <% if (locals.error) { %>
+      <div class="alert alert-danger" role="alert"><%= error %></div>
+      <% } %>
       <div class="form-floating mb-3">
         <input
           type="text"
           class="form-control"
           id="name"
+          name="name"
           placeholder="Example Name"
         />
         <label for="email" class="form-label">Name</label>
@@ -31,6 +35,7 @@
           type="text"
           class="form-control"
           id="usertag"
+          name="usertag"
           placeholder="@usertag"
         />
         <label for="email" class="form-label">Usertag</label>
@@ -40,6 +45,7 @@
           type="email"
           class="form-control"
           id="email"
+          name="email"
           placeholder="name@example.com"
         />
         <label for="email" class="form-label">Email address</label>
@@ -49,6 +55,7 @@
           type="password"
           class="form-control"
           id="password"
+          name="password"
           aria-describedby="password-help"
           placeholder="Password"
         />
@@ -61,7 +68,8 @@
         <input
           type="password"
           class="form-control"
-          id="confirm-password"
+          id="confirm_password"
+          name="confirm_password"
           placeholder="Password Again"
         />
         <label for="confirm-password" class="form-label">Password Again</label>
