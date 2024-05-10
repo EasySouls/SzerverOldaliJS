@@ -21,14 +21,50 @@
 
       <!-- Main Content -->
       <main class="container">
-        <div class="d-flex flex-column gap-4 mb-4">
+        <div class="d-flex flex-column gap-4 my-4">
           <div class="bg-white shadow-sm rounded-2 p-2 shadow-sm border">
             <span class="flex-row gap-1 align-items-center pb-1">
               <h4 class="fw-semibold"><%= post.title %></h4>
-              <a href="#">@<%= post._author %></a>
+              <a href="/users/<%= post.author._id %>"
+                >@<%= post.author.username %></a
+              >
             </span>
             <p class="overflow-auto"><%= post.body %></p>
             <p class="mt-1 text-secondary"><%= post.createdAt %></p>
+          </div>
+          <% if (locals.user) { %>
+          <form action="/posts/<%= post._id %>/comments" method="post">
+            <div class="form-floating mb-3">
+              <textarea
+                class="form-control"
+                id="content"
+                name="content"
+                placeholder="Leave a comment"
+              ></textarea>
+              <label for="content" class="form-label">Leave a comment</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Comment</button>
+          </form>
+          <% } %>
+          <div class="d-flex flex-column gap-4">
+            <% if (post.comments && post.comments.length === 0) { %>
+            <p>No comments yet</p>
+            <% } else { %> <% for (comment of post.comments) { %>
+            <div class="bg-white shadow-sm rounded-2 p-2 shadow-sm border">
+              <a href="/users/<%= comment.author._id %>"
+                >@<%= comment.author.usertag %></a
+              >
+              <p class="overflow-y-auto"><%= comment.content %></p>
+              <% if (locals.user._id == comment._author) { %>
+              <form
+                action="/posts/<%= post._id %>/comments/delete/<%= comment._id %>"
+                method="post"
+              >
+                <button type="submit" class="btn btn-danger">Delete</button>
+              </form>
+              <% } %>
+            </div>
+            <% } %> <% } %>
           </div>
         </div>
       </main>

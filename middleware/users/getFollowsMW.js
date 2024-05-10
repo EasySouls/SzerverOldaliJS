@@ -8,13 +8,28 @@ module.exports = function getFollowsMW(models) {
   const PostModel = requireModel(models, 'Post');
 
   return async (req, res, next) => {
-    const follows = await UserModel.find({ _id: req.user.follows });
-    follows.posts = [];
-    for (const followed of follows) {
-      const posts = PostModel.find({ _author: followed._id });
-      follows.posts = [...follows.posts, ...posts];
+    if (res.locals.user.follows === undefined) {
+      return next(new Error('User follows not found'));
     }
-    res.locals.follows = follows;
+
+    const posts = [];
+    const followedUsers = [];
+    for (const userId of res.locals.user.follows) {
+      const user = await UserModel.findById(userId);
+      if (user === null) {
+        continue;
+      }
+
+      followedUsers.push(user);
+
+      const userPosts = await PostModel.find({ _author: userId });
+      for (const post of userPosts) {
+        post.author = user;
+      }
+      posts.push(...userPosts);
+    }
+    res.locals.posts = posts;
+    res.locals.followedUsers = followedUsers;
     return next();
   };
 };

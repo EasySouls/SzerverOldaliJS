@@ -7,15 +7,25 @@ const requireModel = require('../requireModel');
  */
 module.exports = (models) => {
   const CommentModel = requireModel(models, 'Comment');
+  const UserModel = requireModel(models, 'User');
 
   return async (req, res, next) => {
     if (typeof req.params.postId === 'undefined') {
       return next(new Error('postId required'));
     }
 
+    if (!res.locals.post) {
+      return next(new Error('Post not found'));
+    }
+
     try {
       const comments = await CommentModel.find({ _post: req.params.postId });
-      res.locals.comments = comments;
+      for (let i = 0; i < comments.length; i++) {
+        const comment = comments[i];
+        const user = await UserModel.findOne({ _id: comment._author });
+        comment.author = user;
+      }
+      res.locals.post.comments = comments;
       return next();
     } catch (err) {
       return next(err);

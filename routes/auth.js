@@ -47,11 +47,12 @@ router.post(
     const { salt, hash } = generatePassword(req.body.password);
 
     const user = new UserModel({
-      name: req.body.name,
+      username: req.body.name,
       usertag: req.body.usertag,
       email: req.body.email,
       hash: hash,
       salt: salt,
+      follows: [],
     });
 
     const data = await user.save();
@@ -61,13 +62,37 @@ router.post(
   renderMW('login')
 );
 
-router.get('/signout', (req, res) => {
+router.get('/signout', (req, res, next) => {
   if (req.user) {
-    req.logOut();
-    res.locals.user = null;
-    console.log(`${user.name} signed out`);
+    req.logOut((err) => {
+      if (err) {
+        return next(err);
+      }
+      res.locals.user = null;
+      console.log(`${req.user.name} signed out`);
+      res.redirect('/');
+    });
   }
-  res.redirect('/');
+});
+
+router.get('/forgot-password', renderMW('forgot-password'));
+
+router.post('/forgot-password', async (req, res) => {
+  const user = await UserModel.findOne({ email: req.body.email });
+  console.log(user);
+  if (!user) {
+    return res.render('forgot-password', {
+      error: 'No user with that email found',
+      pageTitle: 'Blaze | Forgot Password',
+    });
+  }
+  return res.render('forgot-password', {
+    data: {
+      salt: user.salt,
+      hash: "You're not getting the hash! That would be a security risk!",
+    },
+    pageTitle: 'Blaze | Forgot Password',
+  });
 });
 
 module.exports = router;

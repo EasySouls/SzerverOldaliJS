@@ -9,6 +9,12 @@ const postSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User',
   },
+  _comments: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Comment',
+    },
+  ],
 });
 
 const Post = db.model('Post', postSchema);

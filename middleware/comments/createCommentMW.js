@@ -6,7 +6,7 @@ const requireModel = require('../requireModel');
  * @param {object} models - An object containing the models
  */
 module.exports = (models) => {
-  const Comment = requireModel(models, 'Comment');
+  const CommentModel = requireModel(models, 'Comment');
 
   return async (req, res, next) => {
     if (
@@ -16,16 +16,12 @@ module.exports = (models) => {
       return next(new Error('Content and postId required'));
     }
 
-    if (typeof res.locals.comment === 'undefined') {
-      res.locals.comment = new Comment();
-    }
-
-    res.locals.comment.content = req.body.content;
-    res.locals.comment._post = req.params.postId;
-    //res.locals.post._author = req.user._id;
-
     try {
-      await res.locals.comment.save();
+      await CommentModel.create({
+        content: req.body.content,
+        _post: req.params.postId,
+        _author: req.user._id,
+      });
       return res.redirect(`/posts/${req.params.postId}`);
     } catch (err) {
       return next(err);

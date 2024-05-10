@@ -7,6 +7,7 @@ const requireModel = require('../requireModel');
  */
 module.exports = function getPostsMyIdMW(models) {
   const PostModel = requireModel(models, 'Post');
+  const UserModel = requireModel(models, 'User');
 
   return async (req, res, next) => {
     try {
@@ -15,6 +16,8 @@ module.exports = function getPostsMyIdMW(models) {
       }
 
       const post = await PostModel.findOne({ _id: req.params.postId });
+      const user = await UserModel.findOne({ _id: post._author });
+      post.author = user;
       res.locals.post = post;
       return next();
     } catch (err) {

@@ -9,7 +9,7 @@ module.exports = function updatePostMW(models) {
 
   return async (req, res, next) => {
     try {
-      if (typeof req.params.id === 'undefined') {
+      if (typeof req.params.postId === 'undefined') {
         return next(new Error('ID is required'));
       }
 
@@ -21,11 +21,12 @@ module.exports = function updatePostMW(models) {
       }
 
       const post = await PostModel.updateOne(
-        { _id: req.params.id },
-        { title: req.body.title, content: req.body.content }
+        { _id: req.params.postId },
+        { title: req.body.title, body: req.body.content }
       );
       res.locals.post = post;
-      return res.redirect(`/posts/${req.params.id}`);
+      console.log('Updated post:', post);
+      return res.redirect(`/posts/${req.params.postId}`);
     } catch (err) {
       return next(err);
     }

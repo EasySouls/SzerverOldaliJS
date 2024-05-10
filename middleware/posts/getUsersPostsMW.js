@@ -7,12 +7,11 @@ module.exports = function getUsersPostsMW(models) {
   const PostModel = requireModel(models, 'Post');
 
   return async (req, res, next) => {
-    console.log(req.params.userId);
     try {
       if (!req.isAuthenticated()) {
         return next(new Error('You must be logged in to view your posts'));
       }
-      const posts = await PostModel.find({ _id: req.user._id });
+      const posts = await PostModel.find({ _author: req.user._id });
       res.locals.posts = posts;
       return next();
     } catch (err) {

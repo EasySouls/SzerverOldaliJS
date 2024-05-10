@@ -5,12 +5,14 @@ const getPostByIdMW = require('../middleware/posts/getPostByIdMW.js');
 const createPostMW = require('../middleware/posts/createPostMW.js');
 const updatePostMW = require('../middleware/posts/updatePostMW.js');
 const getCommentsByPostIdMW = require('../middleware/comments/getCommentsByPostId.js');
-const getCommentsByPostsMW = require('../middleware/comments/getCommentsByPosts.js');
 const getPostsByUserIdMW = require('../middleware/posts/getPostsByUserIdMW.js');
 const getUserByIdMW = require('../middleware/users/getUserByIdMW.js');
 const getUsersPostsMW = require('../middleware/posts/getUsersPostsMW.js');
 const addFollowMW = require('../middleware/users/addFollowMW.js');
 const authGuardMW = require('../middleware/authGuardMW.js');
+const getCurrentUserMW = require('../middleware/users/getCurrentUserMW.js');
+const deletePostByIdMW = require('../middleware/posts/deletePostByIdMW.js');
+const createCommentMW = require('../middleware/comments/createCommentMW.js');
 
 const PostModel = require('../models/post.js');
 const UserModel = require('../models/user.js');
@@ -25,15 +27,8 @@ const models = {
   Comment: CommentModel,
 };
 
-router.get(
-  '/',
-  getPostsMW(models),
-  // getCommentsByPostsMW(models),
-  renderMW('index')
-);
+router.get('/', getCurrentUserMW(), getPostsMW(models), renderMW('index'));
 
-// TODO - add middleware to get follows
-// TODO - add middleware to get posts by follows
 router.get(
   '/follows',
   authGuardMW(),
@@ -53,7 +48,6 @@ router.get(
 router.get('/posts/create', authGuardMW(), renderMW('createPost'));
 router.post('/posts/create', authGuardMW(), createPostMW(models));
 
-// TODO - implement this when the auth is done, so only the author can edit the post
 router.get(
   '/posts/edit/:postId',
   authGuardMW(),
@@ -61,21 +55,32 @@ router.get(
   renderMW('editPost')
 );
 router.post(
-  'posts/edit/:postId',
+  '/posts/edit/:postId',
   authGuardMW(),
   getPostByIdMW(models),
   updatePostMW(models)
 );
 
+router.post('/posts/delete/:postId', authGuardMW(), deletePostByIdMW(models));
+
 router.get(
   '/posts/:postId',
+  getCurrentUserMW(),
   getPostByIdMW(models),
   getCommentsByPostIdMW(models),
   renderMW('post')
 );
 
+router.post(
+  '/posts/:postId/comments',
+  authGuardMW(),
+  getPostByIdMW(models),
+  createCommentMW(models)
+);
+
 router.get(
   '/users/:userId',
+  getCurrentUserMW(),
   getUserByIdMW(models),
   getPostsByUserIdMW(models),
   renderMW('user')
@@ -86,6 +91,7 @@ router.get(
   authGuardMW(),
   getUserByIdMW(models),
   addFollowMW(models),
+  getFollowsMW(models),
   renderMW('follows')
 );
 

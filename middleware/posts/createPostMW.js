@@ -25,8 +25,7 @@ module.exports = (models) => {
     res.locals.post.createdAt = new Date();
     res.locals.post._author = req.user._id;
     try {
-      const saved = await res.locals.post.save();
-      console.log(saved);
+      await res.locals.post.save();
 
       console.log('Post created: ' + res.locals.post);
 
