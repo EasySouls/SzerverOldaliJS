@@ -27,8 +27,6 @@ module.exports = (models) => {
     try {
       await res.locals.post.save();
 
-      console.log('Post created: ' + res.locals.post);
-
       return res.redirect('/');
     } catch (err) {
       return next(err);
