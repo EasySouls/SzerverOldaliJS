@@ -12,7 +12,7 @@ module.exports = function addFollowMW(models) {
       return next(new Error('Person not found'));
     }
     if (!res.locals.user.follows.includes(res.locals.person._id)) {
-      const follows = [...user.follows, res.locals.person._id];
+      const follows = [...res.locals.user.follows, res.locals.person._id];
       res.locals.user.follows = follows;
       user.save();
     }
